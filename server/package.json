@@ -1,0 +1,26 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "dev": "nodemon --watch src --ext js src/app.js",
+    "db:seed": "node src/seed.js",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate"
+  },
+  "dependencies": {
+    "@neondatabase/serverless": "^0.5.0",
+    "dotenv": "^17.0.1",
+    "drizzle-orm": "^0.44.2",
+    "express": "^5.1.0",
+    "pg": "^8.11.3"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.3",
+    "@types/node": "^20.11.17",
+    "drizzle-kit": "^0.31.4",
+    "nodemon": "^3.1.0"
+  }
+}
