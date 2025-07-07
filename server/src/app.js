@@ -1,12 +1,15 @@
 import "dotenv/config";
 import express from "express";
-import { eq } from "drizzle-orm"; // ✅ FIXED
+import { eq } from "drizzle-orm";
+import cors from "cors";
 
 import db from "./db.js";
 import { products } from "./schema.js";
 
 const app = express();
 const PORT = 4000;
+
+app.use(cors());
 
 app.get("/products", async (req, res) => {
   console.log(req.query);
@@ -26,7 +29,7 @@ app.get("/product/:id", async (req, res) => {
     const product = await db
       .select()
       .from(products)
-      .where(eq(products.id, id)) // ✅ FIXED
+      .where(eq(products.id, id))
       .limit(1);
 
     if (product.length === 0) {
