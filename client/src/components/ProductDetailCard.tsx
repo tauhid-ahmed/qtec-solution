@@ -15,35 +15,29 @@ import { Skeleton } from "./ui/skeleton";
 import { Badge } from "./ui/badge";
 import { Separator } from "./ui/separator";
 import { useProductContext } from "@/contexts/product-context";
-import { useEffect } from "react";
 
 type ProductDetailCardProps = {
   product: Product;
 };
 
 export default function ProductDetailCard({ product }: ProductDetailCardProps) {
-  const { state, increaseQuantity, decreaseQuantity, productView } =
-    useProductContext();
+  const { state, increaseQuantity, decreaseQuantity } = useProductContext();
 
   const cartProduct = Object.values(state.cart).find(
     (item) => item.id === product.id
   );
 
-  useEffect(() => {
-    productView();
-  }, []);
-
   return (
-    <div className="mt-4">
+    <div className="py-4">
       <Button variant="link">
         <Link className="flex items-center gap-2" href="/">
           <LucideMoveLeft /> Back to products
         </Link>
       </Button>
-      <div className="flex flex-col sm:flex-row flex-wrap gap-8 justify-between mt-4">
-        <div className="flex-1 items-center justify-center rounded-2xl shadow p-8 bg-secondary">
+      <div className="flex flex-col md:flex-row flex-wrap gap-8 justify-between mt-4">
+        <div className="flex-1 flex items-center justify-center rounded-2xl shadow p-8 bg-secondary">
           <img
-            className="max-h-96 aspect-square mx-auto object-cover"
+            className="max-h-96 aspect-square object-cover"
             src={product.image}
             alt={product.title}
           />
@@ -122,7 +116,7 @@ export default function ProductDetailCard({ product }: ProductDetailCardProps) {
 
 export function ProductDetailSkeleton() {
   return (
-    <div className="mt-4">
+    <div className="py-4">
       <Button variant="link">
         <Link className="flex items-center gap-2" href="/">
           <LucideMoveLeft /> Back to products
