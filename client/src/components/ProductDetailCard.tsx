@@ -79,15 +79,15 @@ export default function ProductDetailCard({ product }: ProductDetailCardProps) {
               <div className="flex items-center border rounded-xl overflow-hidden">
                 <Button
                   onClick={() => decreaseQuantity(product)}
-                  variant="ghost"
+                  variant="tertiary"
                   size="icon"
                 >
                   <LucideMinus />
                 </Button>
-                <span className="px-4 py-2">{cartProduct?.quantity || 0}</span>
+                <span className="px-4">{cartProduct?.quantity || 0}</span>
                 <Button
                   onClick={() => increaseQuantity(product)}
-                  variant="ghost"
+                  variant="tertiary"
                   size="icon"
                 >
                   <LucidePlus />
