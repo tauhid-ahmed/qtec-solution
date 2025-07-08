@@ -1,7 +1,3 @@
-Here's a **clean, professional, and human-friendly `README.md`** for your GitHub project based on everything you've shared (tech stack, structure, deployment, features, and assessment goals):
-
----
-
 # 🛒 Qtec Solution - Mini E-Commerce SPA
 
 This is a **Single Page Application (SPA)** eCommerce frontend built with **React** and a custom **Express backend**. It was developed as part of a frontend developer assessment for **Qtec Solution Ltd**.
@@ -16,12 +12,15 @@ This is a **Single Page Application (SPA)** eCommerce frontend built with **Reac
 ### Frontend:
 
 - ⚛️ React (Pure SPA)
-- 🧩 Custom Mini Router (No React Router)
+- 🚦 Custom Mini Router (No React Router)
 - 🎨 Tailwind CSS v4 + `shadcn/ui`
 - 🔁 FSM-style reducer logic with `useReducer`
 - 🛍️ Cart logic with LocalStorage sync
-- 🧱 Skeleton loaders
-- 🧃 `sonner` for toast notifications
+- 🖼️ Interactive image gallery on product pages
+- ⭐ Dynamic star rating (per product)
+- ✍️ Vanilla form validation (no libraries)
+- 🧱 Skeleton loaders for loading states
+- 🔔 `sonner` for toast notifications
 - 📱 Fully Responsive UI
 - 🌐 Hosted on **Vercel**
 
@@ -33,29 +32,28 @@ This is a **Single Page Application (SPA)** eCommerce frontend built with **Reac
 - 🌱 Seeded dummy products (from [fakestoreapi.com](https://fakestoreapi.com/))
 - 🌐 Hosted on **Render**
 
+### API:
+
+- GET all products (Used in homepage): https://qtec-solution.onrender.com/products
+
+- GET single product (Used in product detail page):https://qtec-solution.onrender.com/product/:id
+
 ---
 
 ## 🧪 Features
 
 - ✅ Custom router (SPA without `react-router`)
 - ✅ Product listing with image, title, price, and “Add to Cart”
-- ✅ Product details page
+- ✅ Product details page with:
+
+  - 🖼️ Interactive image gallery with zoom effect on hover
+  - ⭐ Dynamic star rating display
+
 - ✅ Cart sidebar with quantity controls & total calculation
-- ✅ Checkout modal with simulated order form
-- ✅ Fully styled using `shadcn/ui` and Tailwind
+
+- ✅ Styled using `shadcn/ui` and Tailwind
 - ✅ LocalStorage-powered cart persistence
-- ✅ Toasts for interactions
-- ✅ Minimal and clean UI experience
-
----
-
-## 📁 Folder Structure
-
-```
-/qtec-solution
-  ├── /server     # Express backend with Drizzle ORM
-  └── /frontend   # Pure React SPA with Tailwind, Shadcn, and FSM reducer
-```
+- ✅ User interaction notification
 
 ---
 
@@ -74,12 +72,12 @@ cd qtec-solution
 
 ```bash
 cd server
-cp .env.example .env        # Make sure to set your DATABASE_URL
+cp .env.example .env        # Add your DATABASE_URL
 pnpm install
-pnpm run db:generate        # optional: for types
-pnpm run db:migrate         # optional: to run migrations
-pnpm run db:seed            # seeds products from fakestoreapi
-pnpm run dev                # starts Express server on port (default: 4000)
+pnpm run db:generate        # Optional: generate types from schema
+pnpm run db:migrate         # Optional: run DB migrations
+pnpm run db:seed            # Seeds products from fakestoreapi
+pnpm run dev                # Starts Express server (default port: 4000)
 ```
 
 ---
@@ -111,25 +109,8 @@ VITE_API_URL=https://qtec-solution.onrender.com
 
 ---
 
-## 💡 Notes
-
-- This is **not a monorepo**, but the structure is split into `frontend` and `server` for clarity.
-- The project uses a **minimal FSM (finite state machine)** style reducer pattern for state transitions.
-- **No authentication** is included as per the task instructions.
-- All UI components are responsive and mobile-friendly.
-- The database is hosted on **Neon**, and API is served through **Render**.
-- Feel free to explore and improve further!
-
----
-
 ## 📬 Contact
-
-If you have any questions or feedback, feel free to reach out:
 
 **Tauhid Ahmed**
 📧 [tauhidahmed.dev@gmail.com](mailto:tauhidahmed.dev@gmail.com)
-🌐 [Portfolio](https://tauhidahmed.vercel.app) | [GitHub](https://github.com/tauhid-ahmed) | [LinkedIn](https://linkedin.com/in/tauhidxahmed)
-
----
-
-Would you like this `README.md` exported as a downloadable file?
+🌐 [Portfolio](https://tauhidahmed.vercel.app) • [GitHub](https://github.com/tauhid-ahmed) • [LinkedIn](https://linkedin.com/in/tauhidxahmed)
