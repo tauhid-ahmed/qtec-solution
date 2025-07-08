@@ -103,18 +103,18 @@ function CartItem({ product }: { product: CartItem }) {
         <div className="flex items-center">
           <Button
             onClick={() => decreaseQuantity(product)}
-            variant="outline"
+            variant="tertiary"
             size="icon"
             className="size-7"
           >
             <LucideMinus />
           </Button>
-          <span className="inline-flex size-7 font-medium items-center justify-center">
+          <span className="inline-flex size-7 text-sm font-medium items-center justify-center">
             {product.quantity}
           </span>
           <Button
             onClick={() => increaseQuantity(product)}
-            variant="outline"
+            variant="tertiary"
             size="icon"
             className="size-7"
           >
@@ -127,7 +127,8 @@ function CartItem({ product }: { product: CartItem }) {
           removeFromCart(product.id);
           toast.warning("Product removed from cart");
         }}
-        variant="ghost"
+        size={"icon"}
+        variant="tertiary"
       >
         <LucideTrash2 />
       </Button>
