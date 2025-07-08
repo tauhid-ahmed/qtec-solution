@@ -51,6 +51,7 @@ function productReducer(
     // Adds a product to cart or increases quantity
     case "ADD_TO_CART":
     case "INCREASE_QUANTITY": {
+      if (state.status !== "cart_open" && state.status !== "idle") return state;
       const product = action.payload.product;
       const productId = product.id;
       const existingItem = state.cart[productId];
@@ -72,8 +73,7 @@ function productReducer(
 
     // Decreases quantity of product but not below 1
     case "DECREASE_QUANTITY": {
-      if (state.status !== "cart_open" && state.status !== "view_product")
-        return state;
+      if (state.status !== "cart_open" && state.status !== "idle") return state;
       const product = action.payload.product;
       const productId = product.id;
       const existingItem = state.cart[productId];
@@ -96,9 +96,9 @@ function productReducer(
     // Removes a product from the cart
     case "REMOVE_FROM_CART": {
       if (state.status !== "cart_open") return state;
-      const productId3 = action.payload.productId;
+      const productId = action.payload.productId;
       const cartItems = { ...state.cart };
-      delete cartItems[productId3];
+      delete cartItems[productId];
 
       const nextState = {
         ...state,
@@ -154,13 +154,6 @@ function productReducer(
       return {
         ...state,
         status: "idle",
-      };
-    }
-
-    case "VIEW_PRODUCT": {
-      return {
-        ...state,
-        status: "view_product",
       };
     }
 
@@ -244,10 +237,6 @@ export const useProductReducer = () => {
     dispatch({ type: "PLACE_ORDER_CLOSE" });
   };
 
-  const productView = () => {
-    dispatch({ type: "VIEW_PRODUCT" });
-  };
-
   return {
     state,
     dispatch,
@@ -264,7 +253,6 @@ export const useProductReducer = () => {
     closeCheckout,
     placeOrderOpen,
     placeOrderClose,
-    productView,
   };
 };
 
