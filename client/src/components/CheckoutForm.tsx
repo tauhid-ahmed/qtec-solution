@@ -15,6 +15,10 @@ import { Textarea } from "./ui/textarea";
 export default function CheckoutFormCheckoutForm() {
   const { state, closeCheckout, placeOrderOpen } = useProductContext();
   const isOpen = state.status === "checkout_open";
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    placeOrderOpen();
+  };
   return (
     <Dialog open={isOpen} onOpenChange={() => closeCheckout()}>
       <DialogTrigger className="opacity-0 absolute -left-[9999px]">
@@ -24,29 +28,24 @@ export default function CheckoutFormCheckoutForm() {
         <DialogHeader>
           <DialogTitle className="opacity-0 absolute -left-[9999px]"></DialogTitle>
           <DialogDescription>
-            <form className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-6">
               <div className="space-y-1">
                 <Label>Name:</Label>
-                <Input placeholder="Enter your name" />
+                <Input placeholder="Enter your name" required />
               </div>
               <div className="space-y-1">
                 <Label>Email:</Label>
-                <Input placeholder="Enter your email" />
+                <Input type="email" placeholder="Enter your email" required />
               </div>
               <div className="space-y-1">
                 <Label>Address:</Label>
                 <Textarea
                   placeholder="Enter your address"
                   className="min-h-32"
+                  required
                 />
               </div>
-              <Button
-                onClick={() => placeOrderOpen()}
-                type="button"
-                className="w-full"
-              >
-                Place Order
-              </Button>
+              <Button className="w-full">Place Order</Button>
             </form>
           </DialogDescription>
         </DialogHeader>
