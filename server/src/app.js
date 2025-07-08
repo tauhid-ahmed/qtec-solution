@@ -12,7 +12,6 @@ const PORT = 4000;
 app.use(cors());
 
 app.get("/products", async (req, res) => {
-  console.log(req.query);
   try {
     const productsList = await db.select().from(products);
     res.json(productsList);
