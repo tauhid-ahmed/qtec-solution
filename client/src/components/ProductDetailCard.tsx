@@ -8,13 +8,13 @@ import {
   LucideMoveLeft,
   LucidePlus,
   LucideShare2,
-  LucideStar,
 } from "lucide-react";
 import { Button } from "./ui/button";
 import { Skeleton } from "./ui/skeleton";
 import { Badge } from "./ui/badge";
 import { Separator } from "./ui/separator";
 import { useProductContext } from "@/contexts/product-context";
+import { StarRating } from "./StarRating";
 
 type ProductDetailCardProps = {
   product: Product;
@@ -52,13 +52,7 @@ export default function ProductDetailCard({ product }: ProductDetailCardProps) {
             <div className="space-y-4">
               <h2 className="text-3xl font-semibold">{product.title}</h2>
               <div className="flex gap-2 items-center">
-                <span className="flex text-amber-500">
-                  <LucideStar size="20" />
-                  <LucideStar size="20" />
-                  <LucideStar size="20" />
-                  <LucideStar size="20" />
-                  <LucideStar size="20" />
-                </span>
+                <StarRating value={product.rating?.rate || 0} />
                 <strong>{product.rating?.rate}</strong>
                 <span className="text-sm text-muted-foreground">
                   ({product.rating?.count} reviews)
@@ -160,7 +154,7 @@ function ProductDetailImage({ image, alt }: { image: string; alt: string }) {
   return (
     <div
       onPointerMove={handlePointerMove}
-      className="bg-purple-400 size-96 hover:scale-125 transition-transform duration-300 ease-in-out"
+      className="size-96 hover:scale-125 transition-transform duration-300 ease-in-out"
       style={{
         transformOrigin: "var(--origin-x) var(--origin-y)",
       }}
