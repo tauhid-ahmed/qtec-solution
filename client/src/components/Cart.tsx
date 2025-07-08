@@ -50,16 +50,19 @@ export default function CartSheet() {
           <SheetTitle>Cart</SheetTitle>
           <SheetDescription>Check out your cart</SheetDescription>
         </SheetHeader>
-        <SheetDescription className="px-4 space-y-6 overflow-y-scroll">
+        <div className="px-4 flex-1 space-y-6 overflow-y-scroll">
           {Object.entries(state.cart).map(([key, value]) => (
             <CartItem key={key} product={value} />
           ))}
           {allCartItems === 0 && (
-            <p className="text-center text-muted-foreground text-lg">
-              Your cart is empty
-            </p>
+            <div className="flex-1 gap-4 size-full flex flex-col items-center justify-center">
+              <LucideShoppingCart className="size-16 mx-auto" />
+              <p className="text-center text-muted-foreground text-lg">
+                Your cart is empty
+              </p>
+            </div>
           )}
-        </SheetDescription>
+        </div>
         <SheetFooter>
           <div className="flex justify-between text-lg border-t py-4">
             <span>Subtotal</span>
