@@ -35,19 +35,15 @@ export default function ProductDetailCard({ product }: ProductDetailCardProps) {
         </Link>
       </Button>
       <div className="flex flex-col md:flex-row flex-wrap gap-8 justify-between mt-4">
-        <div className="flex-1 flex items-center justify-center rounded-2xl shadow p-8 bg-secondary">
-          <img
-            className="max-h-96 aspect-square object-cover"
-            src={product.image}
-            alt={product.title}
-          />
+        <div className="flex-1 flex items-center justify-center p-8">
+          <ProductDetailImage image={product.image} alt={product.title} />
         </div>
         <div className="flex-1 space-y-6">
           <div className="flex justify-between gap-2">
-            <Badge variant="secondary" className="capitalize">
+            <Badge variant="2" className="capitalize">
               {product.category}
             </Badge>
-            <Badge variant="outline">
+            <Badge variant="2">
               <LucideEye />
               {product.views} views
             </Badge>
@@ -68,7 +64,7 @@ export default function ProductDetailCard({ product }: ProductDetailCardProps) {
                   ({product.rating?.count} reviews)
                 </span>
               </div>
-              <span className="text-3xl font-medium block text-blue-500">
+              <span className="text-3xl font-medium block">
                 ${product.price?.toFixed(2)}
               </span>
             </div>
@@ -100,10 +96,16 @@ export default function ProductDetailCard({ product }: ProductDetailCardProps) {
             </div>
             <div className="flex gap-2 mt-4">
               <AddToCartButton className="flex-1" product={product} />
-              <Button variant="secondary">
+              <Button
+                className="hover:text-destructive hover:bg-destructive/10"
+                variant="secondary"
+              >
                 <LucideHeart />
               </Button>
-              <Button variant="secondary">
+              <Button
+                className="hover:text-destructive hover:bg-destructive/10"
+                variant="secondary"
+              >
                 <LucideShare2 />
               </Button>
             </div>
@@ -136,6 +138,38 @@ export function ProductDetailSkeleton() {
           <Skeleton className="h-8 w-24" />
         </div>
       </div>
+    </div>
+  );
+}
+
+function ProductDetailImage({ image, alt }: { image: string; alt: string }) {
+  const handlePointerMove = (e: React.PointerEvent<HTMLElement>) => {
+    const currentElement = e.currentTarget as HTMLElement;
+
+    const { width, height, left, top } = currentElement.getBoundingClientRect();
+    const x = e.clientX - left;
+    const y = e.clientY - top;
+
+    const originX = Math.min(Math.ceil((x / width) * 100), 100);
+    const originY = Math.min(Math.ceil((y / height) * 100), 100);
+
+    currentElement.style.setProperty("--origin-x", `${originX}%`);
+    currentElement.style.setProperty("--origin-y", `${originY}%`);
+  };
+
+  return (
+    <div
+      onPointerMove={handlePointerMove}
+      className="bg-purple-400 size-96 hover:scale-125 transition-transform duration-300 ease-in-out"
+      style={{
+        transformOrigin: "var(--origin-x) var(--origin-y)",
+      }}
+    >
+      <img
+        className="max-h-96 aspect-square object-cover"
+        src={image}
+        alt={alt}
+      />
     </div>
   );
 }
