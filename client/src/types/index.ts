@@ -10,64 +10,47 @@ export type Product = {
   category: string;
   description: string;
   image: string;
-  ratings: ProductRating;
+  rating: ProductRating;
   views: number;
+  price: number;
 };
 
-type CartItem = Product & {
+export type CartItem = Product & {
   quantity: number;
 };
 
-type Cart = Record<string, CartItem>;
+export type Cart = Record<Product["id"], CartItem>;
 
 type BaseProductState = {
-  products: Product[];
   cart: Cart;
 };
 
 // --- Product State ---
 export type ProductState =
-  | { status: "fetching" }
-  | ({
-      status: "idle";
-    } & BaseProductState)
-  | ({
-      status: "cart_open";
-    } & BaseProductState)
-  | ({
-      status: "checkout_open";
-    } & BaseProductState)
-  | {
-      status: "error";
-    };
+  | ({ status: "initial" } & BaseProductState)
+  | ({ status: "fetching" } & BaseProductState)
+  | ({ status: "idle" } & BaseProductState)
+  | ({ status: "view_product" } & BaseProductState)
+  | ({ status: "cart_open" } & BaseProductState)
+  | ({ status: "checkout_open" } & BaseProductState)
+  | ({ status: "place_order_open" } & BaseProductState)
+  | ({ status: "error"; message: string } & BaseProductState);
 
-// --- Events ---
-export type Event =
-  | {
-      type: "ADD_TO_CART";
-      payload: { productId: string };
-    }
-  | {
-      type: "INCREASE_QUANTITY";
-      payload: { productId: string };
-    }
-  | {
-      type: "DECREASE_QUANTITY";
-      payload: { productId: string };
-    }
-  | {
-      type: "REMOVE_FROM_CART";
-      payload: { productId: string };
-    }
-  | {
-      type: "TOGGLE_CART";
-    }
-  | {
-      type: "CLEAR_CART";
-    }
-  | {
-      type: "OPEN_CHECKOUT_MODAL";
-    }
-  | {
-      type: "CLOSE_CHECKOUT_MODAL";
-    };
+// --- Product Events ---
+export type ProductEvent =
+  | { type: "FETCHING" }
+  | { type: "FETCH_SUCCESS" }
+  | { type: "FETCH_ERROR"; payload: { message: string } }
+  | { type: "VIEW_PRODUCT" }
+  | { type: "CLEAR_SELECTED_PRODUCT" }
+  | { type: "ADD_TO_CART"; payload: { product: Product } }
+  | { type: "REMOVE_FROM_CART"; payload: { productId: string } }
+  | { type: "CART_OPEN" }
+  | { type: "CART_CLOSE" }
+  | { type: "CLEAR_CART" }
+  | { type: "INCREASE_QUANTITY"; payload: { product: Product } }
+  | { type: "DECREASE_QUANTITY"; payload: { product: Product } }
+  | { type: "OPEN_CHECKOUT" }
+  | { type: "CLOSE_CHECKOUT" }
+  | { type: "PLACE_ORDER_OPEN" }
+  | { type: "PLACE_ORDER_CLOSE" };
