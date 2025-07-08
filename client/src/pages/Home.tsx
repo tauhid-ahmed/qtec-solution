@@ -12,7 +12,7 @@ export default function Homepage() {
       fetching();
       try {
         const response = await fetch(
-          "https://qtec-solution.onrender.com/products"
+          `${import.meta.env.VITE_API_URL}/products`
         );
         if (!response.ok) {
           throw new Error("Network response was not ok");
