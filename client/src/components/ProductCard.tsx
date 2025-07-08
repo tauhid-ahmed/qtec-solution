@@ -10,14 +10,14 @@ type ProductCardProps = {
 
 export default function ProductCard({ product }: ProductCardProps) {
   return (
-    <Card className="text-center hover:-translate-y-0.5 transition-transform duration-300">
+    <Card className="group text-center hover:-translate-y-px transition-transform duration-300 border-0">
       <CardHeader className="relative">
         <img
-          className="h-40 aspect-square mx-auto object-cover"
+          className="h-40 group-hover:scale-110 transition-transform duration-500 aspect-square mx-auto object-cover"
           src={product.image}
           alt={product.title}
         />
-        <CardTitle className="truncate mt-4">
+        <CardTitle className="truncate mt-4 font-normal">
           <Link
             className="before:absolute before:inset-0"
             href={`/product/${product.id}`}
@@ -28,7 +28,7 @@ export default function ProductCard({ product }: ProductCardProps) {
         <p>${product.price}</p>
       </CardHeader>
       <CardContent>
-        <AddToCartButton product={product} />
+        <AddToCartButton className="w-full" size="sm" product={product} />
       </CardContent>
     </Card>
   );
@@ -36,7 +36,7 @@ export default function ProductCard({ product }: ProductCardProps) {
 
 export function ProductCardSkeleton() {
   return (
-    <Card className="flex flex-col items-center">
+    <Card className="flex flex-col items-center border-0">
       <Skeleton className="h-40 w-full" />
       <Skeleton className="h-8 w-3/4" />
       <Skeleton className="h-6 w-20" />
