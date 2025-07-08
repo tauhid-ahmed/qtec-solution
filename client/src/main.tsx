@@ -18,7 +18,7 @@ createRoot(document.getElementById("root")!).render(
         <Container>
           <App />
         </Container>
-        <Toaster />
+        <Toaster position="bottom-left" />
         <CheckoutForm />
         <PlaceOrderAlert />
       </ProductProvider>
