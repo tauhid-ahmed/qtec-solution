@@ -2,13 +2,17 @@ import { useProductContext } from "@/contexts/product-context";
 import { Button } from "./ui/button";
 import type { Product } from "@/types";
 import { toast } from "sonner";
+import { buttonVariants } from "./ui/button";
+import type { VariantProps } from "class-variance-authority";
 
 type AddToCartButtonProps = {
   product: Product;
-} & React.HTMLAttributes<HTMLButtonElement>;
+} & React.ComponentProps<"button"> &
+  VariantProps<typeof buttonVariants>;
 
 export default function AddToCartButton({
   product,
+
   className,
   ...props
 }: AddToCartButtonProps) {
